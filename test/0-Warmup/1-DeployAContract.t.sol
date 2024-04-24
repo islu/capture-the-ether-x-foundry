@@ -18,6 +18,8 @@ contract DeployAContractTest is Test {
 
         // [START]
 
+        // Noting to do here.
+
         // [END]
 
         assertTrue(challenge.isComplete());

@@ -28,6 +28,22 @@ contract ChooseANicknameTest is Test {
 
         // [START]
 
+        // https://neptunemutual.com/web3-tools/bytes32-to-string-converter/
+
+        bytes32 nickname = bytes32("Nic");
+        console.logBytes32(nickname);
+        // console.logAddress(challenge.player());
+        vm.prank(player);
+        cte.setNickname(nickname);
+
+        // console.logBytes1(cte.nicknameOf(player)[0]);
+        // console.logBytes1(cte.nicknameOf(player)[1]);
+        // console.logAddress(captureTheEtherAddress);
+        // console.logAddress(address(cte));
+        // console.logAddress(address(challenge.cte()));
+
+        console.logBool(challenge.isComplete());
+
         // [END]
 
         assertTrue(challenge.isComplete());

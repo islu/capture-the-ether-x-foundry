@@ -18,6 +18,8 @@ contract CallMetTest is Test {
 
         // [START]
 
+        challenge.callme();
+
         // [END]
 
         assertTrue(challenge.isComplete());
