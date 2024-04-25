@@ -18,8 +18,12 @@ contract GuessTheNumberTest is Test {
 
         // [START]
 
+        challenge.guess{value: 1 ether}(uint8(42));
+
         // [END]
 
         assertTrue(challenge.isComplete());
     }
+
+    receive() external payable {}
 }

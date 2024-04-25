@@ -8,7 +8,13 @@ import {GuessTheRandomNumberChallenge} from "../../src/1-Lotteries/3-GuessTheRan
 contract GuessTheRandomNumberTest is Test {
     address challengeAddress;
 
+    uint256 number;
+    uint256 timestamp;
+
     function setUp() public {
+        vm.roll(10);
+        number = vm.getBlockNumber();
+        timestamp = vm.getBlockTimestamp();
         GuessTheRandomNumberChallenge challenge = new GuessTheRandomNumberChallenge{value: 1 ether}();
         challengeAddress = payable(address(challenge));
     }
@@ -18,8 +24,16 @@ contract GuessTheRandomNumberTest is Test {
 
         // [START]
 
+        uint8 answer = uint8(uint256(keccak256(abi.encodePacked(blockhash(number - 1), timestamp))));
+
+        console.log("The answer is: ", answer);
+
+        challenge.guess{value: 1 ether}(answer);
+
         // [END]
 
         assertTrue(challenge.isComplete());
     }
+
+    receive() external payable {}
 }
