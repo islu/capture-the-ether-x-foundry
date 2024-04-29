@@ -18,6 +18,9 @@ contract AssumeOwnershipTest is Test {
 
         // [START]
 
+        challenge.AssumeOwmershipChallenge();
+        challenge.authenticate();
+
         // [END]
 
         assertTrue(challenge.isComplete());
