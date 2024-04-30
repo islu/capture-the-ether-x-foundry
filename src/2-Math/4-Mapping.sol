@@ -4,8 +4,8 @@
 pragma solidity ^0.5.0;
 
 contract MappingChallenge {
-    bool public isComplete;
-    uint256[] map;
+    bool public isComplete; // slot 0
+    uint256[] map; // slot 1
 
     function set(uint256 key, uint256 value) public {
         // Expand dynamic array as needed
