@@ -34,15 +34,15 @@ contract TokenWhaleChallenge {
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     function _transfer(address to, uint256 value) internal {
-        balanceOf[msg.sender] -= value;
-        balanceOf[to] += value;
+        balanceOf[msg.sender] -= value; // underflow
+        balanceOf[to] += value; // overflow
 
         emit Transfer(msg.sender, to, value);
     }
 
     function transfer(address to, uint256 value) public {
         require(balanceOf[msg.sender] >= value);
-        require(balanceOf[to] + value >= balanceOf[to]);
+        require(balanceOf[to] + value >= balanceOf[to]); // overflow
 
         _transfer(to, value);
     }
@@ -56,10 +56,10 @@ contract TokenWhaleChallenge {
 
     function transferFrom(address from, address to, uint256 value) public {
         require(balanceOf[from] >= value);
-        require(balanceOf[to] + value >= balanceOf[to]);
+        require(balanceOf[to] + value >= balanceOf[to]); // overflow
         require(allowance[from][msg.sender] >= value);
 
-        allowance[from][msg.sender] -= value;
+        allowance[from][msg.sender] -= value; // underflow
         _transfer(to, value);
     }
 }
