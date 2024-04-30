@@ -33,7 +33,9 @@ contract RetirementFundChallenge {
     function withdraw() public {
         require(msg.sender == owner);
 
-        if (now < expiration) {
+        if (
+            block.timestamp < expiration // if (now < expiration)
+        ) {
             // early withdrawal incurs a 10% penalty
             msg.sender.transfer(address(this).balance * 9 / 10);
         } else {
@@ -44,7 +46,7 @@ contract RetirementFundChallenge {
     function collectPenalty() public {
         require(msg.sender == beneficiary);
 
-        uint256 withdrawn = startBalance - address(this).balance;
+        uint256 withdrawn = startBalance - address(this).balance; // underflow
 
         // an early withdrawal occurred
         require(withdrawn > 0);
